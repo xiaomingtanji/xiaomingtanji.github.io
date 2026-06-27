@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小明谭记 个人官网</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+        ul { list-style: none; }
+        a { text-decoration: none; color: #333; }
+        /* 导航栏 */
+        header {
+            width: 100%;
+            height: 70px;
+            background: #fff;
+            box-shadow: 0 1px 5px #eee;
+            position: fixed;
+            top: 0;
+            z-index: 999;
+            transition: all 0.3s;
+        }
+        .nav-wrap {
+            width: 1200px;
+            height: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #165DFF;
+        }
+        .nav-list {
+            display: flex;
+            gap: 40px;
+        }
+        .nav-list li a:hover {
+            color: #165DFF;
+        }
+        /* Banner */
+        .banner {
+            margin-top: 70px;
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, #165DFF, #4080ff);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-align: center;
+        }
+        .banner h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        .banner p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        .btn {
+            padding: 12px 36px;
+            background: #fff;
+            color: #165DFF;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        /* 产品区域 */
+        .container {
+            width: 1200px;
+            margin: 80px auto;
+        }
+        .title {
+            text-align: center;
+            font-size: 30px;
+            color: #222;
+            margin-bottom: 50px;
+        }
+        .tab-box {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            justify-content: center;
+        }
+        .tab-item {
+            padding: 10px 24px;
+            border: 1px solid #165DFF;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .tab-item.active {
+            background: #165DFF;
+            color: #fff;
+        }
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .product-card {
+            border: 1px solid #eee;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .product-card h3 {
+            margin: 15px 0 10px;
+        }
+        /* 弹窗 */
+        .mask {
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: none;
+            z-index: 1000;
+        }
+        .modal {
+            width: 420px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 8px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .modal h3 {
+            margin-bottom: 20px;
+        }
+        .modal input {
+            width: 100%;
+            height: 42px;
+            margin-bottom: 15px;
+            padding: 0 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .modal .submit {
+            width: 100%;
+            height: 42px;
+            background: #165DFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .close {
+            position: absolute;
+            top:15px;
+            right:20px;
+            font-size:22px;
+            cursor:pointer;
+        }
+        /* 底部 */
+        footer {
+            width: 100%;
+            padding: 40px 0;
+            background: #111;
+            color: #aaa;
+            text-align: center;
+        }
+        /* 移动端适配 */
+        @media(max-width:1200px){
+            .nav-wrap,.container{ width:90%; }
+        }
+        @media(max-width:768px){
+            .nav-list{ display:none; }
+            .banner h2{ font-size:28px; }
+            .product-list{ grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航 -->
+    <header id="header">
+        <div class="nav-wrap">
+            <div class="logo">小明谭记</div>
+            <ul class="nav-list">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="product.html">产品中心</a></li>
+                <li><a href="about.html">关于我们</a></li>
+                <li><a href="news.html">新闻资讯</a></li>
+                <li><a href="contact.html">联系我们</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Banner -->
+    <section class="banner">
+        <h2>一站式企业数字化解决方案</h2>
+        <p>深耕企业软件开发、网站定制、数字化管理系统搭建</p>
+        <a href="javascript:openModal()" class="btn">立即咨询</a>
+    </section>
+
+    <!-- 产品板块 -->
+    <section class="container">
+        <h2 class="title">核心产品</h2>
+        <div class="tab-box">
+            <div class="tab-item active" data-tab="tab1">网站开发</div>
+        </div>
+        <div class="product-list" id="tab1">
+            <div class="product-card">
+                <h3>企业品牌官网</h3>
+                <p>响应式定制官网，适配电脑，提升品牌形象与客户咨询量</p>
+            </div>
+            <div class="product-card">
+                <h3>营销落地页</h3>
+                <p>招商、活动、产品推广单页，高转化表单设计</p>
+            </div>
+            <div class="product-card">
+                <h3>商城静态页面</h3>
+                <p>商品展示、购物、结算静态前端页面</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 咨询弹窗 -->
+    <div class="mask" id="mask">
+        <div class="modal">
+            <span class="close" onclick="closeModal()">×</span>
+            <h3>在线咨询</h3>
+            <input type="text" placeholder="您的姓名" id="name">
+            <input type="tel" placeholder="联系电话" id="phone">
+            <button class="submit" onclick="checkForm()">提交信息</button>
+        </div>
+    </div>
+
+    
+
+    <script>
+        // 导航滚动变色
+        const header = document.getElementById('header');
+        window.onscroll = function(){
+            if(window.scrollY > 100){
+                header.style.background = '#165DFF';
+                header.style.boxShadow = '0 1px 8px #165DFF80';
+                document.querySelector('.logo').style.color = '#fff';
+                document.querySelectorAll('.nav-list a').forEach(item=>{
+                    item.style.color = '#fff';
+                })
+            }else{
+                header.style.background = '#fff';
+                document.querySelector('.logo').style.color = '#165DFF';
+                document.querySelectorAll('.nav-list a').forEach(item=>{
+                    item.style.color = '#333';
+                })
+            }
+        }
+
+        // 弹窗控制
+        const mask = document.getElementById('mask');
+        function openModal(){ mask.style.display = 'block'; }
+        function closeModal(){ mask.style.display = 'none'; }
+
+        // 表单简单验证
+        function checkForm(){
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            if(!name){ alert('请输入姓名'); return; }
+            if(!/^1[3-9]\d{9}$/.test(phone)){ alert('手机号格式错误'); return; }
+            alert('提交成功，我们会尽快联系您！');
+            closeModal();
+        }
+
+        // Tab切换
+        const tabs = document.querySelectorAll('.tab-item');
+        tabs.forEach(tab=>{
+            tab.onclick = function(){
+                tabs.forEach(t=>t.classList.remove('active'));
+                this.classList.add('active');
+            }
+        })
+    </script>
+</body>
+</html>
+
